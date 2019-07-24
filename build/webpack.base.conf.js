@@ -63,6 +63,18 @@ module.exports = {
                     name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
                 }
             }
+            // {
+            //     test: /\.css$/,
+            //     loader: 'style-loader!css-loader'
+            // }, // 处理 CSS 文件的 loader
+            // {
+            //     test: /\.less$/,
+            //     loaders: ['style-loader', 'css-loader', 'less-loader']
+            // }, // 处理 less 文件的 loader
+            // {
+            //     test: /\.scss$/,
+            //     loaders: ['style-loader', 'css-loader', 'sass-loader']
+            // } // 处理 scss 文件的 loader
         ]
     },
     node: {
