@@ -1,106 +1,20 @@
 <template>
     <div>
         <ul class="mui-table-view">
-				<li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>111</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>111</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>222</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击2次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-                <li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>333</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-                <li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>444</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-                <li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>555</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>666</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-				<li class="mui-table-view-cell mui-media">
-					<router-link to="/home/newsinfo">
-						<img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
-						<div class="mui-media-body">
-							<h1>777</h1>
-							<p class='mui-ellipsis'>
-                                <span>发表时间：{{ new Date()|dateFormat }}</span>
-                                <span>点击1次</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>
-
-
-
-			</ul>
+		  <li class="mui-table-view-cell mui-media" v-for="item in newslist" :key="item.id">
+            <!-- <router-link :to="'/home/newsinfo/' + item.id"> -->
+			<router-link to="/home/newsinfo">
+              <img class="mui-media-object mui-pull-left" src="../../images/menu1(1).png">
+              <div class="mui-media-body">
+                <h1>{{ item.title }}</h1>
+                <p class='mui-ellipsis'>
+                  <span>发表时间：{{ item.ctime | dateFormat }}</span>
+                  <span>点击：{{item.click}}次</span>
+                </p>
+              </div>
+            </router-link>
+          </li>
+	    </ul>
     </div>
 </template>
 
@@ -122,6 +36,20 @@
 
 <script>
 export default {
-    
+    data() {
+		return {
+			newslist: [
+				{ id: 1, title: '111', ctime: new Date(), click: 1 },
+				{ id: 2, title: '222', ctime: new Date(), click: 0 },
+				{ id: 3, title: '333', ctime: new Date(), click: 20 },
+				{ id: 4, title: '444', ctime: new Date(), click: 3 },
+				{ id: 5, title: '555', ctime: new Date(), click: 11 },
+				{ id: 6, title: '666', ctime: new Date(), click: 10 },
+				{ id: 7, title: '777', ctime: new Date(), click: 15 },
+				{ id: 8, title: '888', ctime: new Date(), click: 17 },
+				{ id: 9, title: '999', ctime: new Date(), click: 16 }
+			]
+		}
+	},
 }
 </script>

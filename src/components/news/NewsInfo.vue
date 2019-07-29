@@ -9,13 +9,7 @@
 
             <hr>
 
-            <div class="content">你好你好你好你好你好你好你好你好
-                你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                你好你好你好你好你好你好你好你好你好你好你好你好
+            <div class="content">
             </div>
         </div>
         <comment-box></comment-box>
@@ -27,7 +21,9 @@ import comment from '../subcomponents/comment'
 export default {
     data() {
         return {
-            
+            newsinfo: [
+                {}
+            ]
         }
     },
     created() {
@@ -57,7 +53,6 @@ export default {
             display: flex;
             justify-content: space-between;
         }
-        .content {
-        }
+
     }
 </style>

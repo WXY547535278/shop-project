@@ -6,6 +6,7 @@ import search from '../components/tabbar/SearchContainer.vue'
 import shopcar from '../components/tabbar/ShopcarContainer.vue'
 import newslist from '../components/news/NewsList.vue'
 import newsinfo from '../components/news/NewsInfo.vue'
+import photolist from '../components/photo/photolist.vue'
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -16,7 +17,8 @@ export default new VueRouter({
         { path: '/search', component: search },
         { path: '/shopcar', component: shopcar },
         { path: '/home/newslist', component: newslist },
-        { path: '/home/newsinfo', component: newsinfo }
+        { path: '/home/newsinfo', component: newsinfo },
+        { path: '/home/photolist', component: photolist }
     ],
     linkActiveClass: 'mui-active' //覆盖默认的路由高亮类，默认的类叫做router-link-active
 })
