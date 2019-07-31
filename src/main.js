@@ -6,6 +6,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
+Vue.http.options.root = 'http://www.liulongbin.top:3005/'
+Vue.http.options.emulateJSON = true;
 import router from './router/index.js'
 import 'mint-ui/lib/style.css'
 import { Header, Swipe, SwipeItem, Button } from 'mint-ui'
@@ -17,9 +19,10 @@ Vue.component(SwipeItem.name, SwipeItem)
 Vue.component(Button.name, Button)
 import moment from 'moment'
 Vue.filter('dateFormat', function(dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
-        return moment(dataStr).format(pattern)
-    })
-    /* eslint-disable no-new */
+    return moment(dataStr).format(pattern)
+})
+
+/* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,

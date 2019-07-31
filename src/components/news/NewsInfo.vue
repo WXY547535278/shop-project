@@ -1,18 +1,16 @@
 <template>
     <div>
         <div class="newsinfo-container">
-            <h3 class="title">1111111111</h3>
+            <h3 class="title">{{ newsinfo.title }}</h3>
             <p class="subtitle">
-                <span>发表时间：{{ new Date()|dateFormat}}</span>
-                <span>点击1次</span>
+                <span>发表时间：{{ newsinfo.add_time | dateFormat }}</span>
+                <span>点击{{ newsinfo.click }}次</span>
             </p>
-
             <hr>
-
-            <div class="content">
+            <div class="content" v-html = "newsinfo.content">
             </div>
         </div>
-        <comment-box></comment-box>
+        <comment-box :id="this.id"></comment-box>
     </div>
 </template>
 
@@ -21,16 +19,23 @@ import comment from '../subcomponents/comment'
 export default {
     data() {
         return {
-            newsinfo: [
-                {}
-            ]
+            id: this.$route.params.id, // 将 URL 地址中传递过来的 Id值，挂载到 data上，方便以后调用
+            newsinfo: {} // 新闻对象
         }
     },
     created() {
-        
+        this.getNewsInfo();   
     },
     methods: {
-        
+        getNewsInfo() {
+            this.$http.get("api/getnew/" + this.id).then(result => {
+                if(result.body.status === 0) {
+                    this.newsinfo = result.body.message[0];
+                } else {
+                    Toast("获取新闻失败!");
+                }
+            });
+        }
     },
     components: {
         "comment-box": comment
@@ -52,6 +57,11 @@ export default {
             color: #226aff;
             display: flex;
             justify-content: space-between;
+        }
+        .content {
+            img {
+                width: 100%;
+            }
         }
 
     }

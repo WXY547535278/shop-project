@@ -5,9 +5,9 @@
         <textarea placeholder="请发表您的评论" maxlength="120" v-model="msg"></textarea>
         <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
         <div class="cmt-list">
-          <div class="cmt-item" v-for="item in comment" :key="item.id">
+          <div class="cmt-item" v-for="(item,i) in comments" :key="item.add_time">
             <div class="cmt-title">
-            第{{ item.id }}楼&nbsp;&nbsp;用户：{{ item.user}}&nbsp;&nbsp;发表时间：{{ item.add_time | dateFormat }}
+            第{{ i+1 }}楼&nbsp;&nbsp;用户：{{ item.user_name }}&nbsp;&nbsp;发表时间：{{ item.add_time | dateFormat }}
             </div>
             <div class="cmt-body">
           {{ item.content === 'undefined' ? '此用户很懒，嘛都没说': item.content }}
@@ -25,33 +25,8 @@ export default {
     data() {        
       return {
         pageIndex: 1,
-        msg: '',
-        comment:[],
-        comments: [
-          { id: 1, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 2, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 3, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 4, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 5, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 6, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 7, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 8, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 9, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 10, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:1 },
-          { id: 11, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 12, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 13, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 14, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 15, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 16, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 17, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 18, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 19, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 20, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:2 },
-          { id: 21, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:3 },
-          { id: 22, add_time: new Date(), user: 'jack' ,content:'你好！',pageIndex:3 },
-
-        ],
+        msg: "",
+        comments:[]
       }
     },
     created() {
@@ -59,9 +34,12 @@ export default {
     },
     methods: {
       getComments() {
-        this.comments.forEach(element => {
-          if(element.pageIndex==this.pageIndex){
-            this.comment = this.comment.concat(element)
+        this.$http.get("api/getcomments/"+this.id+"?pageindex="+this.pageIndex)
+        .then(result=>{
+          if(result.body.status === 0 ){
+            this.comments = this.comments.concat(result.body.message)
+          }else {
+            Toast("获取评论失败！")
           }
         });
       },
@@ -73,18 +51,25 @@ export default {
         if (this.msg.trim().length === 0) {
           return Toast("评论内容不能为空！");
         }
-        var cmt = {
-          id: 23,
-          add_time: new Date(),
-          user: 'mike',
-          pageIndex: 4,
-          content: this.msg
-        }
-        this.comments.push(cmt);
-        this.msg = ""
-        Toast("发表成功");
-      }
+        this.$http
+        .post("api/postcomment/" + this.$route.params.id, {
+          content: this.msg.trim()
+        })
+        .then(function(result) {
+          if (result.body.status === 0) {
+            // 1. 拼接出一个评论对象
+            var cmt = {
+              user_name: "匿名用户",
+              add_time: Date.now(),
+              content: this.msg.trim()
+            };
+            this.comments.unshift(cmt);
+            this.msg = "";
+          }
+        });
+    }
     },
+    props: ["id"]
 }
 </script>
 
