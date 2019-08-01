@@ -90,15 +90,14 @@ export default {
   }
 
   .thumbs{
-    .my-gallery {
+    /deep/ .my-gallery {
     display: flex;
     flex-wrap: wrap;
     figure {
       width: 30%;
       margin: 5px;
       img {
-        // width: 100%;
-        margin: 10px;
+        width: 100%;
         box-shadow: 0 0 8px #999;
       }
     }
