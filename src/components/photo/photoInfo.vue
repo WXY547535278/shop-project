@@ -5,12 +5,12 @@
       <span>发表时间：{{ photoinfo.add_time | dateFormat }}</span>
       <span>点击：{{ photoinfo.click }}次</span>
     </p>
-
     <hr>
 
     <!-- 缩略图区域 -->
     <div class="thumbs">
-      <img class="preview-img" v-for="(item, index) in list" :src="item.src" height="100" @click="$preview.open(index, list)" :key="item.src">
+      <vue-preview :slides="list" @close="handleClose"></vue-preview>
+      <!-- <img class="preview-img" v-for="(item, index) in list" :src="item.src" height="100" @click="$preview.open(index, list)" :key="item.src"> -->
     </div>
 
     <!-- 图片内容区域 -->
@@ -54,6 +54,7 @@ export default {
           result.body.message.forEach(item => {
             item.w = 600;
             item.h = 400;
+            item.msrc = item.src;
           });
           // 把完整的数据保存到 list 中
           this.list = result.body.message;
@@ -89,10 +90,23 @@ export default {
   }
 
   .thumbs{
-    img{
-      margin: 10px;
-      box-shadow: 0 0 8px #999;
+    .my-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    figure {
+      width: 30%;
+      margin: 5px;
+      img {
+        // width: 100%;
+        margin: 10px;
+        box-shadow: 0 0 8px #999;
+      }
     }
+  }
+    // img{
+    //   margin: 10px;
+    //   box-shadow: 0 0 8px #999;
+    // }
   }
 }
 </style>
