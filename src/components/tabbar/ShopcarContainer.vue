@@ -4,7 +4,8 @@
             <div class="mui-card" v-for="item in goodslist" :key="item.id">
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-                        <mt-switch v-model="value"></mt-switch>
+                        <mt-switch v-model="$store.getters.getGoodsSelected[item.id]"
+                        @change="selectedChanged(item.id, $store.getters.getGoodsSelected[item.id])"></mt-switch>
                         <img :src="item.thumb_path" alt="" srcset="">
                           <div class="info">
                             <h1>{{ item.title }}</h1>
@@ -13,18 +14,23 @@
                               <numbox :initcount="$store.getters.getGoodsCount[item.id]"
                               :goodsid="item.id"></numbox>
                             </p>
-                            <a href="">删除</a>
+                            <a href="#" @click.prevent="remove(item.id, i)">删除{{$store.getters.getGoodsCount[item.id]}}</a>
                           </div>
 					</div>
 				</div>
 			</div>
             <div class="mui-card">
 				<div class="mui-card-content">
-					<div class="mui-card-content-inner">
+					<div class="mui-card-content-inner jiesuan">
+                        <p>总计（不含运费）</p>
+                        <p>已勾选商品<span class="red">{{ $store.getters.getGoodsCountAndAmount.count }}</span>件，总价<span class="red">
+                            ￥{{ $store.getters.getGoodsCountAndAmount.amount }}</span></p>
 					</div>
+                    <mt-button type="danger">去结算</mt-button>
 				</div>
 			</div>
         </div>
+        <p>{{ $store.getters.getGoodsSelected }}</p>
     </div>
 </template>
 <script>
@@ -52,6 +58,13 @@ export default {
                     this.goodslist = result.body.message
                 }
             })
+        },
+        remove(id, index) {
+            this.goodslist.splice(index, 1)
+            this.$store.commit("removeFormCar", id)
+        },
+        selectedChanged(id, val) {
+            this.$store.commit("updateGoodsSelected",{ id, selected: val })
         }
     },
     components: {
@@ -81,6 +94,16 @@ export default {
                 .price {
                     color: red;
                     font-weight: bold;
+                }
+            }
+            .jiesuan {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .red {
+                    color: red;
+                    font-weight: bold;
+                    font-size: 16px;
                 }
             }
         }

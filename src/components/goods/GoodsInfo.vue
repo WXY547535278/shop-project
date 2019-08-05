@@ -92,7 +92,7 @@ export default {
                 id:this.id,
                 count: this.selectedCount,
                 price: this.goodsinfo.sell_price,
-                seleted: true
+                selected: true
             }
             this.$store.commit("addToCar",goodsinfo)
         },

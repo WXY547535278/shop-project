@@ -3,7 +3,7 @@
 <!-- 我们可以 使用 watch 属性监听，来 监听 父组件传递过来的 max 值，不管 watch 会被触发几次，但是，最后一次，肯定是一个 合法的 max 数值 -->
   <div class="mui-numbox" data-numbox-min='1'>
     <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-    <input id="test" class="mui-input-numbox" type="number" value="1" @change="countChanged" ref="numbox" />
+    <input id="test" class="mui-input-numbox" type="number" :value="initcount" @change="countChanged" ref="numbox" />
     <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
   </div>
 
@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     countChanged() {
+      console.log(this.$refs.numbox.value);
         this.$store.commit("updateGoodsInfo", {
             id: this.goodsid,
             count:this.$refs.numbox.value
