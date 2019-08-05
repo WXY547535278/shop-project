@@ -1,8 +1,8 @@
 <template>
     <div class="mui-numbox" data-numbox-min='1' data-numbox-max='max'>
 	    <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-	    <input id="test" class="mui-input-numbox" type="number" value="1" 
-        @change="countChanged" ref="numbox"/>
+	    <input id="test" class="mui-input-numbox" type="number"
+        @change="countChanged" ref="numbox" value="1"/>
 	    <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
 	</div>
 </template>
