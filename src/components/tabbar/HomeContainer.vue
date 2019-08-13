@@ -27,8 +27,8 @@
           </li>
   </ul> 
   <!-- 产品区块 -->
-  <div class="jd_product">
-        <section class="jd_proBox">
+  <div class="product">
+        <section class="proBox">
             <div class="pro_tit nb">
                 <div class="f_left">
                     <span class="sk_text">掌上秒杀</span>
@@ -65,7 +65,7 @@
                 </ul>
             </div>
         </section>
-        <section class="jd_proBox">
+        <section class="proBox">
             <div class="pro_tit"><h3>推荐商品</h3></div>
             <div class="pro_content">
                 <a href="#" class="w_p50"><img src="../../images/cp1.jpg" alt=""/></a>
@@ -129,11 +129,11 @@ export default {
     font-size: 13px;
     }
 }
-.jd_product{
+.product{
   ul,a {
     list-style: none;
   }
-  .jd_proBox{
+  .proBox{
     margin-top: 10px;
     box-shadow: 0 0 1px #d8d8d8;
     min-height: 200px;
