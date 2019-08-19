@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <mt-header fixed title="Vue项目">
+        <mt-header fixed title="S-shop">
             <span slot="left" @click="goBack" v-show="flag">
                 <mt-button icon="back">返回</mt-button>
             </span>

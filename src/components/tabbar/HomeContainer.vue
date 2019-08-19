@@ -33,17 +33,17 @@
                 <div class="f_left">
                     <span class="sk_text">掌上秒杀</span>
                     <div class="sk_time">
-                        <span>0</span>
-                        <span>0</span>
+                        <span>{{span1}}</span>
+                        <span>{{span2}}</span>
                         <span>:</span>
-                        <span>0</span>
-                        <span>0</span>
+                        <span>{{span3}}</span>
+                        <span>{{span4}}</span>
                         <span>:</span>
-                        <span>0</span>
-                        <span>0</span>
+                        <span>{{span5}}</span>
+                        <span>{{span6}}</span>
                     </div>
                 </div>
-                <div class="f_right"><a href="#" class="m_r10">更多></a></div>
+                <div class="f_right"><router-link to="/home/goodslist" class="m_r10">更多></router-link></div>
             </div>
             <div class="pro_con">
                 <ul class="sk_product">
@@ -90,13 +90,38 @@ import swiper from '../subcomponents/swiper'
 export default {
     data() {
         return {
-            lunbotuList: []
+            time: 11*60*60,
+            span1: '',
+            span2: '',
+            span3: '',
+            span4: '',
+            span5: '',
+            span6: ''
         };
     },
     created() {
-        this.getLunbotu();
+    },
+    mounted() {
+      this.timer()
     },
     methods: {
+      timer() {
+        var timer1 = setInterval(() => {
+          this.time--
+          var h = Math.floor(this.time/3600)
+          var m = Math.floor(this.time%3600/60)
+          var s = Math.floor(this.time%60)
+          this.span1 = Math.floor(h/10)
+          this.span2 = Math.floor(h%10)
+          this.span3 = Math.floor(m/10)
+          this.span4 = Math.floor(m%10)
+          this.span5 = Math.floor(s/10)
+          this.span6 = Math.floor(s%10)
+        if (this.time<0) {
+            clearInterval(timer);
+        }
+        },1000)
+      }
     },
     components:{
       "swiper": swiper
